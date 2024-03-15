@@ -185,34 +185,25 @@ ion-icon{
 .flex-wrap{
     flex-wrap: wrap;
 }
-.seprator{
-    width: 100%;
-    height: .4rem;
-    background-color: var(--bg-gray-hover);
+main{
+    width: 95%;
+    margin: 0 auto; 
+    position: relative;
+    background-color: blue;
 }
-
-.padding{
-    /* background-color: #9f0d14; */
-    padding: 4% 0;
-}
-i{
-    color: var(--text-primary-color);
-}
-
-.gap{
-    gap: 8px;
-}
-
 /* global css ends here  */
+.container{
+    transition: transform .5s ;
+    width: 70%;
+    
+}
 header{
     /* margin-top: 10rem; */
     padding: 1rem 0;
     /* background-color: green; */
     /* overflow: hidden; */
 }
-.container{
-    transition: transform .5s ;
-}
+
 header .icon-cart{
     font-size: 2.5rem;
     position: relative;
@@ -230,14 +221,23 @@ header .icon-cart span{
     right: -15px;
 
 }
+
+.listProduct .image{
+    height: 200px;
+    /* background-color: red; */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .listProduct .item img{
-    width: 90%;
-    filter: drop-shadow(0 5px 10px #5e625e);
+    width: 80%;
+
 }
 .listProduct{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    gap: 10px;
 }
 .listProduct .item{
     background-color: #eeeee6;
@@ -261,23 +261,30 @@ header .icon-cart span{
     border: none;
     cursor: pointer;
 }
+
+
+.cartTabRow{
+    width: 30%;
+    background-color: red;
+    position: relative;
+}
 .cartTab{
-    width: 400px;
+    width: inherit;
     background-color: #353432;
     color: #eee;
     position: fixed;
-    inset: 0 -400px 0 auto;
+    inset: 0 0 0 auto;
     display: grid;
     grid-template-rows: 70px;
     grid-template-rows: 70px 1fr 70px;
     transition: .5s ;
 }
-body.showCart .cartTab{
+/* body.showCart .cartTab{
     inset: 0 0 0 auto;
 }
 body.showCart .container{
     transform: translateX(-250px);
-}
+} */
 .cartTab h1{
     padding: 20px;
     margin: 0;
@@ -299,24 +306,37 @@ body.showCart .container{
     color: black;
 }
 
-.cartTab .listCart .item img{
-    width: 80%;
-}
 .cartTab .listCart .item{
-    display: grid;
-    grid-template-columns: 70px 150px 50px 1fr;
+    display: flex;
+    justify-content: space-between;
+
+    /* grid-template-columns: 70px 150px 50px 200px; */
     gap: 10px;
     text-align: center;
     align-items: center;
+}
+
+.cartTab .listCart .item .image{
+    width: 50px ;
+}
+.cartTab .listCart .item img{
+    width: 80%;
+}
+
+.listCart .quantity{
+    /* background-color: red; */
+    display: flex;
+    /* width: 5x; */
 }
 .listCart .quantity span{
     display: inline-block;
     width: 25px;
     height: 25px;
     background-color: #eee;
-    color: #555;
+    color: #555 !important;
     border-radius: 50%;
     cursor: pointer;
+    font-size: 2.3rem;
 }
 .listCart .quantity span:nth-child(2){
     background-color: transparent;
