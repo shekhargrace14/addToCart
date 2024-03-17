@@ -265,7 +265,7 @@ header .icon-cart span{
 
 .cartTabRow{
     width: 30%;
-    background-color: red;
+    /* background-color: red; */
     position: relative;
 }
 .cartTab{

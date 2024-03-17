@@ -5,7 +5,7 @@ let listProductHTML =  document.querySelector('.listProduct');
 let listCartHTML = document.querySelector('.listCart');
 let iconCartSpan = document.querySelector('.icon-cart span');
 
-let listProduct = [];
+let listProducts = [];
 let carts = [];
 iconCart.addEventListener('click', ()=>{
     body.classList.toggle('showCart')
@@ -15,8 +15,8 @@ closeCart.addEventListener('click',()=>{
 })
 const addDataToHTML = ()=>{
     listProductHTML.innerHTML = '';
-    if(listProduct.length>0){
-        listProduct.forEach(product=>{
+    if(listProducts.length>0){
+        listProducts.forEach(product=>{
             let newProduct = document.createElement('div');
             newProduct.classList.add('item');
             newProduct.dataset.id = product.id;
@@ -42,7 +42,7 @@ listProductHTML.addEventListener('click', (event)=>{
     let positionClick = event.target;
     if(positionClick.classList.contains('addCart')){
         let product_id = positionClick.parentElement.dataset.id;
-        alert(product_id)
+        // alert(product_id)
         addToCart(product_id);
     }
 })
@@ -62,16 +62,63 @@ const addToCart = (product_id)=>{
         carts[positionThisProductInCart].quantity = carts[positionThisProductInCart].quantity + 1;
     }
     addCartToHTML();
+    addCartToMemory();
 }
+const addCartToMemory=()=>{
+    localStorage.setItem('cart', JSON.stringify(carts));
+}
+const addCartToHTML = () =>{
+    listCartHTML.innerHTML = '';
+    let totalQuantity = 0;
+    if(carts.length>0){
+        carts.forEach(cart =>{
+            totalQuantity = totalQuantity + cart.quantity;
+            let newCart = document.createElement('div');
+            newCart.classList.add('item');
+            let positionProduct = listProducts.findIndex((value)=> value.id == cart.product_id);
+            let info = listProducts[positionProduct];
+            newCart.innerHTML= `
+            <div class="item">
+                <div class="image">-*
+                    <img src="${info.image}" alt="">
+                </div>
+                <div class="name">
+                    ${info.name}
+                </div>
+                <div class="totalPrice">
+                    ${info.price * cart.quantity}
+                </div>
+                <div class="quantity">
+                    <span class="minus d-flex justify-center align-center"><i
+                            class="fa-solid fa-minus"></i>
+                    </span>
+                    <span>${cart.quantity}</span>
+                    <span class="plus d-flex justify-center align-center"><i
+                            class="fa-solid fa-plus"></i>
+                    </span>
 
+                </div>
+            </div>
+            `;
+            listCartHTML.appendChild(newCart);
+        })
+    }
+    iconCartSpan.innerText = totalQuantity;
+}
 const initApp = () =>{
     // get data from 
     fetch('https://fakestoreapi.com/products')
     .then(response => response.json())
     .then(data =>{
         console.log(data)
-        listProduct = data;
+        listProducts = data;
         addDataToHTML();
+
+        // get cart from memory
+        if(localStorage.getItem('cart')){
+            carts = JSON.parse(localStorage.getItem('carts'));
+            addCartToHTML();
+        }
     })
 }
 
