@@ -22,7 +22,7 @@
 }
 
 body{
-    background-color: var(--bg-light-primary);
+    background-color: var(--bg-dark-primary);
 }
 html{
     font-size: 10px;
@@ -240,7 +240,7 @@ header .icon-cart span{
     gap: 10px;
 }
 .listProduct .item{
-    background-color: #eeeee6;
+    background-color: #353432;
     padding: 20px;
     border-radius: 20px;
 }
